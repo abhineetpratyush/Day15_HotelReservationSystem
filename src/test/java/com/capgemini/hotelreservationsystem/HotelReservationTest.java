@@ -78,4 +78,15 @@ public class HotelReservationTest {
 		Assert.assertEquals(4, (int) ratingList.get(1));
 		Assert.assertEquals(5, (int) ratingList.get(2));
 	}
+	
+	@Test
+	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestBestRatedHotel() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
+		String cheapestBestRatedHotelInfo = hotelReservation.getCheapestBestRatedHotel("11 Sep 2020", "12 Sep 2020");
+		log.info(cheapestBestRatedHotelInfo);
+		Assert.assertEquals("Bridgewood, Rating: 4, Total Cost: $200", cheapestBestRatedHotelInfo);
+	}		
 }
