@@ -21,11 +21,12 @@ public class HotelReservation {
 
 	/**
 	 * uc1 : add hotel with name and rate for regular customer
+	 * uc3 : add ability to take in both separate weekday and weekend room rates
 	 * @param hotelName
 	 * @param roomRate
 	 */
-	public void addHotel(String hotelName, int roomRate) {
-		HotelDetails hotelDetails = new HotelDetails(hotelName, roomRate);  
+	public void addHotel(String hotelName, int weekdayRoomRate, int weekendRoomRate) {
+		HotelDetails hotelDetails = new HotelDetails(hotelName, weekdayRoomRate, weekendRoomRate);  
 		this.hotelList.add(hotelDetails);
 	}
 
@@ -34,7 +35,7 @@ public class HotelReservation {
 	}
 
 	/**
-	 * uc2 : get cheapest hotel in a given data range
+	 * uc2 : get cheapest hotel in a given date range
 	 * @param startDate
 	 * @param endDate
 	 * @return
@@ -44,7 +45,7 @@ public class HotelReservation {
 		LocalDate startDateInput = LocalDate.parse(startDate, dateFormat);
 		LocalDate endDateInput = LocalDate.parse(endDate, dateFormat);
 		int noOfDaysToBook = (int) ChronoUnit.DAYS.between(startDateInput, endDateInput) + 1;
-		Map<String, Integer> hotelNameToTotalCostMap = hotelList.stream().collect(Collectors.toMap(hotel -> hotel.getHotelName(), hotel -> hotel.getRoomRate() * noOfDaysToBook));
+		Map<String, Integer> hotelNameToTotalCostMap = hotelList.stream().collect(Collectors.toMap(hotel -> hotel.getHotelName(), hotel -> hotel.getWeekdayRoomRate() * noOfDaysToBook));
 		String cheapestHotelName = hotelNameToTotalCostMap.keySet().stream().min((hotel1, hotel2) -> hotelNameToTotalCostMap.get(hotel1) - hotelNameToTotalCostMap.get(hotel2)).orElse(null);
 		String cheapestHotelInfo = cheapestHotelName + ", Total Cost: $" + hotelNameToTotalCostMap.get(cheapestHotelName);
 		return cheapestHotelInfo;

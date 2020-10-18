@@ -2,11 +2,13 @@ package com.capgemini.hotelreservationsystem;
 
 public class HotelDetails {
 	private String hotelName;
-	private int roomRate;
+	private int weekdayRoomRate;
+	private int weekendRoomRate;
 
-	public HotelDetails(String hotelName, int roomRate) {
+	public HotelDetails(String hotelName, int weekdayRoomRate, int weekendRoomRate) {
 		this.hotelName = hotelName;
-		this.roomRate = roomRate;
+		this.weekdayRoomRate = weekdayRoomRate;
+		this.weekendRoomRate = weekendRoomRate;
 	}
 
 	public String getHotelName() {
@@ -17,16 +19,25 @@ public class HotelDetails {
 		this.hotelName = hotelName;
 	}
 
-	public int getRoomRate() {
-		return roomRate;
+	public int getWeekdayRoomRate() {
+		return weekdayRoomRate;
 	}
 
-	public void setRoomRate(int roomRate) {
-		this.roomRate = roomRate;
+	public void setWeekdayRoomRate(int weekdayRoomRate) {
+		this.weekdayRoomRate = weekdayRoomRate;
+	}
+
+	public int getWeekendRoomRate() {
+		return weekendRoomRate;
+	}
+
+	public void setWeekendRoomRate(int weekendRoomRate) {
+		this.weekendRoomRate = weekendRoomRate;
 	}
 
 	@Override
 	public String toString() {
-		return "HotelDetails [hotelName=" + hotelName + ", roomRate=" + roomRate + "]";
+		return "HotelDetails [hotelName=" + hotelName + ", weekdayRoomRate=" + weekdayRoomRate + ", weekendRoomRate="
+				+ weekendRoomRate + "]";
 	}
 }
