@@ -8,8 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.capgemini.hotelreservationsystem.HotelReservation.CustomerType;
-
 public class HotelReservationTest {
 	private static final Logger log = LogManager.getLogger(HotelReservationTest.class);
 
@@ -137,7 +135,24 @@ public class HotelReservationTest {
 		catch(CustomerTypeException e) {
 			e.printStackTrace();
 		}
-		String cheapestBestRatedHotelForRewards = hotelReservation.cheapestBestRatedHotelSelector("11 Sep 2020", "12 Sep 2020");
+		String cheapestBestRatedHotelForRewards = hotelReservation.cheapestBestRatedHotelSelector("11 Sep 2020,12 Sep 2020");
+		log.info(cheapestBestRatedHotelForRewards);
+		Assert.assertEquals("Ridgewood, Rating: 5, Total Cost: $140", cheapestBestRatedHotelForRewards);
+	}	
+	
+	@Test
+	public void given3Hotels_WhenDateRangeProvidedForRewardsCustomer_ShouldReturnCheapestBestRatedHotelUsingRegex() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110, 90, 80, 80, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 110, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 100, 40, 5);
+		try{
+			hotelReservation.typeOfCustomer("REWARDS");
+		}
+		catch(CustomerTypeException e) {
+			e.printStackTrace();
+		}
+		String cheapestBestRatedHotelForRewards = hotelReservation.cheapestBestRatedHotelSelector("11 Sep 2020,12 Sep 2020");
 		log.info(cheapestBestRatedHotelForRewards);
 		Assert.assertEquals("Ridgewood, Rating: 5, Total Cost: $140", cheapestBestRatedHotelForRewards);
 	}		

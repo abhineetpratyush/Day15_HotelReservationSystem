@@ -167,6 +167,7 @@ public class HotelReservation {
 				if(hotelList.get(i).getWeekdayRoomRateRewards() * noOfWeekdays + hotelList.get(i).getWeekendRoomRateRewards() * noOfWeekends == minCost)
 					cheapestHotelList.add(hotelList.get(i));
 			}
+			//using streams
 			HotelDetails cheapestBestRatedHotelForRewards = cheapestHotelList.stream().max((hotelOne, hotelTwo) -> hotelOne.getRating() - hotelTwo.getRating()).orElse(null);
 			cheapestBestRatedHotelForRewardsInfo = cheapestBestRatedHotelForRewards.getHotelName() + ", Rating: " + cheapestBestRatedHotelForRewards.getRating() + ", Total Cost: $" + minCost;
 		} catch (DateTimeParseException e) {
@@ -184,11 +185,17 @@ public class HotelReservation {
 		else throw new CustomerTypeException("Please enter only REGULAR or REWARDS!");
 	}
 	
-	public String cheapestBestRatedHotelSelector(String startDate, String endDate) {
+	/**
+	 * uc10 : ability to use regex (streams already being used above)
+	 * @param date
+	 * @return
+	 */
+	public String cheapestBestRatedHotelSelector(String date) {
+		String[] dateArray = date.split(",");
 		if(typeOfCustomer == CustomerType.REGULAR)
-			return getCheapestBestRatedHotel(startDate, endDate);
+			return getCheapestBestRatedHotel(dateArray[0], dateArray[1]);
 		else
-			return getCheapestBestRatedHotelForRewards(startDate, endDate);
+			return getCheapestBestRatedHotelForRewards(dateArray[0], dateArray[1]);
 	}
 	
 	public static void main(String[] args) {
