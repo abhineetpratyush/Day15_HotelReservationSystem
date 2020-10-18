@@ -52,7 +52,7 @@ public class HotelReservationTest {
 		Assert.assertEquals(50, (int) weekendRoomRates.get(1));
 		Assert.assertEquals(150, (int) weekendRoomRates.get(2));
 	}
-	
+
 	@Test
 	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotelBasedOnWeekdayAndWeekend() {
 		HotelReservation hotelReservation = new HotelReservation();
@@ -62,5 +62,20 @@ public class HotelReservationTest {
 		String cheapestHotelInfo = hotelReservation.getCheapestHotel("11 Sep 2020", "12 Sep 2020");
 		log.info(cheapestHotelInfo);
 		Assert.assertEquals("Lakewood, Bridgewood Total Cost: $200", cheapestHotelInfo);
+	}
+
+	@Test
+	public void given3Hotels_WhenRatingsAdded_ShouldReturnRates() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
+		List<Integer> ratingList = new ArrayList<>();
+		hotelReservation.hotelList.stream().forEach(hotelDetails -> {
+			ratingList.add(hotelDetails.getRating());
+		});
+		Assert.assertEquals(3, (int) ratingList.get(0));
+		Assert.assertEquals(4, (int) ratingList.get(1));
+		Assert.assertEquals(5, (int) ratingList.get(2));
 	}
 }

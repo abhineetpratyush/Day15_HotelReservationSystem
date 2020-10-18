@@ -23,6 +23,7 @@ public class HotelReservation {
 	/**
 	 * uc1 : add hotel with name and rate for regular customer
 	 * uc3 : add ability to take in both separate weekday and weekend room rates
+	 * uc5 : add ability to take in ratings for the hotels
 	 * @param hotelName
 	 * @param roomRate
 	 */
