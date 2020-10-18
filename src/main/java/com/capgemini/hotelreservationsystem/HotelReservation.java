@@ -176,7 +176,7 @@ public class HotelReservation {
 		}
 		return cheapestBestRatedHotelForRewardsInfo;
 	}
-	
+
 	public void typeOfCustomer(String typeOfCustomer) throws CustomerTypeException {
 		if(CustomerType.REGULAR.name().equals(typeOfCustomer))
 			this.typeOfCustomer = CustomerType.REGULAR;
@@ -184,9 +184,10 @@ public class HotelReservation {
 			this.typeOfCustomer = CustomerType.REWARDS;
 		else throw new CustomerTypeException("Please enter only REGULAR or REWARDS!");
 	}
-	
+
 	/**
-	 * uc10 : ability to use regex (streams already being used above)
+	 * uc10 : ability to use RegEx for rewards (streams already being used above, also see test method in test file)
+	 * uc11 : ability to use RegEx for rewards (streams already being used above, also see test method in test file)
 	 * @param date
 	 * @return
 	 */
@@ -197,7 +198,7 @@ public class HotelReservation {
 		else
 			return getCheapestBestRatedHotelForRewards(dateArray[0], dateArray[1]);
 	}
-	
+
 	public static void main(String[] args) {
 		log.info("Welcome to Hotel Reservation Program");
 	}

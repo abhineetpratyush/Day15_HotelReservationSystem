@@ -122,7 +122,7 @@ public class HotelReservationTest {
 		Assert.assertEquals(50, (int) weekendRateListRewards.get(1));
 		Assert.assertEquals(40, (int) weekendRateListRewards.get(2));
 	}
-	
+
 	@Test
 	public void given3Hotels_WhenDateRangeProvidedForRewardsCustomer_ShouldReturnCheapestBestRatedHotel() {
 		HotelReservation hotelReservation = new HotelReservation();
@@ -139,7 +139,7 @@ public class HotelReservationTest {
 		log.info(cheapestBestRatedHotelForRewards);
 		Assert.assertEquals("Ridgewood, Rating: 5, Total Cost: $140", cheapestBestRatedHotelForRewards);
 	}	
-	
+
 	@Test
 	public void given3Hotels_WhenDateRangeProvidedForRewardsCustomer_ShouldReturnCheapestBestRatedHotelUsingRegex() {
 		HotelReservation hotelReservation = new HotelReservation();
@@ -155,5 +155,22 @@ public class HotelReservationTest {
 		String cheapestBestRatedHotelForRewards = hotelReservation.cheapestBestRatedHotelSelector("11 Sep 2020,12 Sep 2020");
 		log.info(cheapestBestRatedHotelForRewards);
 		Assert.assertEquals("Ridgewood, Rating: 5, Total Cost: $140", cheapestBestRatedHotelForRewards);
+	}	
+
+	@Test
+	public void given3Hotels_WhenDateRangeProvidedForRegularCustomer_ShouldReturnCheapestBestRatedHotelUsingRegex() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110, 90, 80, 80, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 110, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 100, 40, 5);
+		try{
+			hotelReservation.typeOfCustomer("REGULAR");
+		}
+		catch(CustomerTypeException e) {
+			e.printStackTrace();
+		}
+		String cheapestBestRatedHotelForRegular = hotelReservation.cheapestBestRatedHotelSelector("11 Sep 2020,12 Sep 2020");
+		log.info(cheapestBestRatedHotelForRegular);
+		Assert.assertEquals("Bridgewood, Rating: 4, Total Cost: $200", cheapestBestRatedHotelForRegular);
 	}		
 }
