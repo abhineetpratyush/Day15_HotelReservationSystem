@@ -18,4 +18,15 @@ public class HotelReservationTest {
 		int noOfHotelsAdded = hotelReservation.countNoOfHotels();
 		Assert.assertEquals(3, noOfHotelsAdded);
 	}
+	
+	@Test
+	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotel() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110);
+		hotelReservation.addHotel("Bridgewood", 160);
+		hotelReservation.addHotel("Ridgewood", 220);
+		String cheapestHotelInfo = hotelReservation.getCheapestHotel("10 Sep 2020", "11 Sep 2020");
+		log.info(cheapestHotelInfo);
+		Assert.assertEquals("Lakewood, Total Cost: $220", cheapestHotelInfo);
+	}
 }
