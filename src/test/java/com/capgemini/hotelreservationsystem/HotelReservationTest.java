@@ -26,18 +26,18 @@ public class HotelReservationTest {
 	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotel() {
 		HotelReservation hotelReservation = new HotelReservation();
 		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 160, 60);
+		hotelReservation.addHotel("Bridgewood", 150, 50);
 		hotelReservation.addHotel("Ridgewood", 220, 150);
 		String cheapestHotelInfo = hotelReservation.getCheapestHotel("10 Sep 2020", "11 Sep 2020");
 		log.info(cheapestHotelInfo);
-		Assert.assertEquals("Lakewood, Total Cost: $220", cheapestHotelInfo);
+		Assert.assertEquals("Lakewood Total Cost: $220", cheapestHotelInfo);
 	}
 
 	@Test
 	public void given3Hotels_WhenWeekdayAndWeekendRatesAdded_ShouldReturnThoseRates() {
 		HotelReservation hotelReservation = new HotelReservation();
 		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 160, 60);
+		hotelReservation.addHotel("Bridgewood", 150, 50);
 		hotelReservation.addHotel("Ridgewood", 220, 150);
 		List<Integer> weekendRoomRates = new ArrayList<>();
 		List<Integer> weekdayRoomRates = new ArrayList<>();
@@ -46,10 +46,21 @@ public class HotelReservationTest {
 			weekdayRoomRates.add(hotelDetails.getWeekdayRoomRate());
 		});
 		Assert.assertEquals(110, (int) weekdayRoomRates.get(0));
-		Assert.assertEquals(160, (int) weekdayRoomRates.get(1));
+		Assert.assertEquals(150, (int) weekdayRoomRates.get(1));
 		Assert.assertEquals(220, (int) weekdayRoomRates.get(2));
 		Assert.assertEquals(90, (int) weekendRoomRates.get(0));
-		Assert.assertEquals(60, (int) weekendRoomRates.get(1));
+		Assert.assertEquals(50, (int) weekendRoomRates.get(1));
 		Assert.assertEquals(150, (int) weekendRoomRates.get(2));
+	}
+	
+	@Test
+	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotelBasedOnWeekdayAndWeekend() {
+		HotelReservation hotelReservation = new HotelReservation();
+		hotelReservation.addHotel("Lakewood", 110, 90);
+		hotelReservation.addHotel("Bridgewood", 150, 50);
+		hotelReservation.addHotel("Ridgewood", 220, 150);
+		String cheapestHotelInfo = hotelReservation.getCheapestHotel("11 Sep 2020", "12 Sep 2020");
+		log.info(cheapestHotelInfo);
+		Assert.assertEquals("Lakewood, Bridgewood Total Cost: $200", cheapestHotelInfo);
 	}
 }
