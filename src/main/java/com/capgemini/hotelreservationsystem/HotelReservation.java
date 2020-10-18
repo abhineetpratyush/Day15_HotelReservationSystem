@@ -26,8 +26,8 @@ public class HotelReservation {
 	 * @param hotelName
 	 * @param roomRate
 	 */
-	public void addHotel(String hotelName, int weekdayRoomRate, int weekendRoomRate) {
-		HotelDetails hotelDetails = new HotelDetails(hotelName, weekdayRoomRate, weekendRoomRate);  
+	public void addHotel(String hotelName, int weekdayRoomRate, int weekendRoomRate, int rating) {
+		HotelDetails hotelDetails = new HotelDetails(hotelName, weekdayRoomRate, weekendRoomRate, rating);  
 		this.hotelList.add(hotelDetails);
 	}
 

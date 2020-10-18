@@ -14,9 +14,9 @@ public class HotelReservationTest {
 	@Test
 	public void given3HotelDetails_WhenAdded_ShouldReturnCount3() {
 		HotelReservation hotelReservation = new HotelReservation();
-		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 160, 60);
-		hotelReservation.addHotel("Ridgewood", 220, 150);
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 160, 60, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
 		log.info(hotelReservation.hotelList);
 		int noOfHotelsAdded = hotelReservation.countNoOfHotels();
 		Assert.assertEquals(3, noOfHotelsAdded);
@@ -25,9 +25,9 @@ public class HotelReservationTest {
 	@Test
 	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotel() {
 		HotelReservation hotelReservation = new HotelReservation();
-		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 150, 50);
-		hotelReservation.addHotel("Ridgewood", 220, 150);
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
 		String cheapestHotelInfo = hotelReservation.getCheapestHotel("10 Sep 2020", "11 Sep 2020");
 		log.info(cheapestHotelInfo);
 		Assert.assertEquals("Lakewood Total Cost: $220", cheapestHotelInfo);
@@ -36,9 +36,9 @@ public class HotelReservationTest {
 	@Test
 	public void given3Hotels_WhenWeekdayAndWeekendRatesAdded_ShouldReturnThoseRates() {
 		HotelReservation hotelReservation = new HotelReservation();
-		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 150, 50);
-		hotelReservation.addHotel("Ridgewood", 220, 150);
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
 		List<Integer> weekendRoomRates = new ArrayList<>();
 		List<Integer> weekdayRoomRates = new ArrayList<>();
 		hotelReservation.hotelList.stream().forEach(hotelDetails -> {
@@ -56,9 +56,9 @@ public class HotelReservationTest {
 	@Test
 	public void given3Hotels_InAGivenDateRange_ShouldReturnCheapestHotelBasedOnWeekdayAndWeekend() {
 		HotelReservation hotelReservation = new HotelReservation();
-		hotelReservation.addHotel("Lakewood", 110, 90);
-		hotelReservation.addHotel("Bridgewood", 150, 50);
-		hotelReservation.addHotel("Ridgewood", 220, 150);
+		hotelReservation.addHotel("Lakewood", 110, 90, 3);
+		hotelReservation.addHotel("Bridgewood", 150, 50, 4);
+		hotelReservation.addHotel("Ridgewood", 220, 150, 5);
 		String cheapestHotelInfo = hotelReservation.getCheapestHotel("11 Sep 2020", "12 Sep 2020");
 		log.info(cheapestHotelInfo);
 		Assert.assertEquals("Lakewood, Bridgewood Total Cost: $200", cheapestHotelInfo);
